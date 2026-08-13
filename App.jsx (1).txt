@@ -162,21 +162,36 @@ function AuthScreen({ onAuthed }) {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-6" style={{ background: "#14213D" }}>
-      <div className="w-full max-w-sm">
-        <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ background: "#FFB627" }}>
-          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 20, color: "#14213D" }}>H</span>
-        </div>
-        <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 26, color: "#FFF" }}>Get things done in Kampala</h1>
-        <p className="text-[13px] mt-2 mb-6" style={{ color: "#8891A3" }}>Post a task or pick one up nearby.</p>
+    <div className="min-h-screen flex flex-col relative overflow-hidden" style={{
+      background: "radial-gradient(circle at 15% 0%, #2D6A4F 0%, #14213D 45%), radial-gradient(circle at 100% 100%, #E4572E 0%, transparent 40%), #14213D",
+    }}>
+      {/* decorative pattern layer */}
+      <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.5 }}>
+        <svg width="100%" height="260" viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice">
+          <circle cx="40" cy="40" r="70" fill="#FFB627" opacity="0.15" />
+          <circle cx="340" cy="30" r="50" fill="#2D6A4F" opacity="0.25" />
+          <circle cx="370" cy="180" r="90" fill="#E4572E" opacity="0.12" />
+          <circle cx="30" cy="200" r="40" fill="#FFB627" opacity="0.1" />
+        </svg>
+      </div>
 
+      <div className="relative px-6 pt-14 pb-8">
+        <div className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5 shadow-lg" style={{ background: "linear-gradient(135deg, #FFB627, #E4572E)" }}>
+          <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 22, color: "#14213D" }}>Q</span>
+        </div>
+        <h1 style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 28, color: "#FFF" }}>Get things done in Kampala</h1>
+        <p className="text-[13px] mt-2" style={{ color: "#B7C0D8" }}>Post a task or pick one up nearby.</p>
+      </div>
+
+      <div className="relative flex-1 px-6 pb-10">
+        <div className="w-full max-w-sm mx-auto rounded-2xl p-5" style={{ background: "rgba(20,33,61,0.55)", backdropFilter: "blur(4px)", border: "1px solid rgba(255,255,255,0.08)" }}>
         <div className="flex gap-2 mb-5">
           <button onClick={() => setMode("signup")} className="flex-1 py-2.5 rounded-lg text-[12px] font-semibold"
-            style={{ background: mode === "signup" ? "#FFB627" : "#1F2C50", color: mode === "signup" ? "#14213D" : "#8891A3" }}>
+            style={{ background: mode === "signup" ? "linear-gradient(135deg, #FFB627, #E4572E)" : "#1F2C50", color: mode === "signup" ? "#14213D" : "#8891A3" }}>
             Create account
           </button>
           <button onClick={() => setMode("login")} className="flex-1 py-2.5 rounded-lg text-[12px] font-semibold"
-            style={{ background: mode === "login" ? "#FFB627" : "#1F2C50", color: mode === "login" ? "#14213D" : "#8891A3" }}>
+            style={{ background: mode === "login" ? "linear-gradient(135deg, #FFB627, #E4572E)" : "#1F2C50", color: mode === "login" ? "#14213D" : "#8891A3" }}>
             Log in
           </button>
         </div>
@@ -202,9 +217,10 @@ function AuthScreen({ onAuthed }) {
         )}
 
         <button onClick={submit} disabled={busy} className="w-full py-3.5 rounded-xl flex items-center justify-center gap-2"
-          style={{ background: "#FFB627", color: "#14213D", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, opacity: busy ? 0.7 : 1 }}>
+          style={{ background: "linear-gradient(135deg, #FFB627, #FFC960)", color: "#14213D", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, opacity: busy ? 0.7 : 1 }}>
           {busy ? <Loader2 size={16} className="animate-spin" /> : mode === "signup" ? "Create account" : "Log in"}
         </button>
+        </div>
       </div>
     </div>
   );
@@ -359,9 +375,20 @@ function HomeScreen({ name, tasks, loading, error, onRetry, goPost, goBrowse, se
   const openNearby = tasks.filter((t) => t.status === "open" && t.requester_name !== name).length;
   return (
     <div>
-      <ScreenHeader eyebrow={`HI, ${name.toUpperCase()}`} title="What do you need done today?" />
-      <div className="px-5 mb-5">
-        <button onClick={goPost} className="w-full flex items-center justify-between px-5 py-4 rounded-2xl" style={{ background: "#FFB627" }}>
+      <div className="relative overflow-hidden px-5 pt-6 pb-8" style={{
+        background: "radial-gradient(circle at 90% -10%, #2D6A4F 0%, transparent 55%), linear-gradient(160deg, #14213D 0%, #1B2C52 100%)",
+      }}>
+        <svg className="absolute top-0 right-0 pointer-events-none" width="180" height="180" viewBox="0 0 180 180" style={{ opacity: 0.35 }}>
+          <circle cx="150" cy="20" r="60" fill="#FFB627" opacity="0.25" />
+          <circle cx="170" cy="120" r="35" fill="#E4572E" opacity="0.3" />
+        </svg>
+        <div className="relative">
+          <div className="text-[10px] font-semibold tracking-[0.2em] mb-1" style={{ color: "#FFB627", fontFamily: "'IBM Plex Mono', monospace" }}>HI, {name.toUpperCase()}</div>
+          <h1 style={{ color: "#FFF", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 22 }}>What do you need done today?</h1>
+        </div>
+      </div>
+      <div className="px-5 -mt-4 mb-5 relative">
+        <button onClick={goPost} className="w-full flex items-center justify-between px-5 py-4 rounded-2xl shadow-lg" style={{ background: "linear-gradient(135deg, #FFB627, #E4572E)" }}>
           <div className="text-left">
             <div className="text-[11px] font-bold tracking-widest mb-0.5" style={{ color: "#14213D", fontFamily: "'IBM Plex Mono', monospace" }}>NEW TASK</div>
             <div style={{ color: "#14213D", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 16 }}>Post a task in under a minute</div>
@@ -370,11 +397,11 @@ function HomeScreen({ name, tasks, loading, error, onRetry, goPost, goBrowse, se
         </button>
       </div>
       <div className="px-5 grid grid-cols-2 gap-3 mb-6">
-        <div className="rounded-xl p-4" style={{ background: "#FFFFFF", border: "1px solid #ECE9DF" }}>
+        <div className="rounded-xl p-4" style={{ background: "linear-gradient(135deg, #FFFFFF, #FDF6E8)", border: "1px solid #ECE9DF" }}>
           <div style={{ fontFamily: "'IBM Plex Mono', monospace", fontWeight: 600, fontSize: 20, color: "#14213D" }}>{openNearby}</div>
           <div className="text-[11px]" style={{ color: "#6B7280" }}>Open tasks nearby</div>
         </div>
-        <button onClick={goBrowse} className="rounded-xl p-4 text-left" style={{ background: "#14213D" }}>
+        <button onClick={goBrowse} className="rounded-xl p-4 text-left" style={{ background: "linear-gradient(135deg, #14213D, #2D6A4F)" }}>
           <Search size={16} color="#FFB627" />
           <div className="text-[11px] font-semibold mt-2" style={{ color: "#FFF" }}>Browse & earn</div>
         </button>
@@ -439,7 +466,9 @@ function PostTaskFlow({ name, onCreated }) {
               return (
                 <button key={c.id} onClick={() => setCat(c.id)} className="flex flex-col items-start gap-3 p-4 rounded-xl text-left"
                   style={{ background: selected ? "#14213D" : "#FFFFFF", border: selected ? "1px solid #14213D" : "1px solid #ECE9DF" }}>
-                  <Icon size={19} color={selected ? "#FFB627" : c.color} />
+                  <div className="w-9 h-9 rounded-lg flex items-center justify-center" style={{ background: selected ? "rgba(255,182,39,0.18)" : `linear-gradient(135deg, ${c.color}33, ${c.color}14)` }}>
+                    <Icon size={17} color={selected ? "#FFB627" : c.color} />
+                  </div>
                   <span className="text-[13px] font-medium" style={{ color: selected ? "#FFF" : "#14213D" }}>{c.label}</span>
                 </button>
               );
@@ -505,7 +534,19 @@ function BrowseScreen({ name, tasks, loading, error, onRetry, onAccept, acceptin
   const open = tasks.filter((t) => t.status === "open" && t.requester_name !== name);
   return (
     <div>
-      <ScreenHeader eyebrow={`${open.length} NEARBY`} title="Tasks you could pick up" />
+      <div className="relative overflow-hidden px-5 pt-6 pb-7" style={{
+        background: "radial-gradient(circle at 10% -10%, #E4572E 0%, transparent 50%), linear-gradient(160deg, #14213D 0%, #1B2C52 100%)",
+      }}>
+        <svg className="absolute bottom-0 left-0 pointer-events-none" width="160" height="120" viewBox="0 0 160 120" style={{ opacity: 0.3 }}>
+          <circle cx="10" cy="100" r="55" fill="#FFB627" opacity="0.25" />
+          <circle cx="90" cy="30" r="25" fill="#2D6A4F" opacity="0.3" />
+        </svg>
+        <div className="relative">
+          <div className="text-[10px] font-semibold tracking-[0.2em] mb-1" style={{ color: "#FFB627", fontFamily: "'IBM Plex Mono', monospace" }}>{open.length} NEARBY</div>
+          <h1 style={{ color: "#FFF", fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 22 }}>Tasks you could pick up</h1>
+        </div>
+      </div>
+      <div className="pt-5">
       {loading && <Spinner label="Loading open tasks…" />}
       {error && <ErrorBanner message={error} onRetry={onRetry} />}
       {!loading && !error && open.length === 0 && (
@@ -524,6 +565,7 @@ function BrowseScreen({ name, tasks, loading, error, onRetry, onAccept, acceptin
           } />
         ))}
       </div>
+      </div>
     </div>
   );
 }
@@ -539,7 +581,7 @@ function MyTasksScreen({ name, session, verifyStatus, onVerifyUpdated, tasks, lo
     <div>
       <div className="px-5 pt-5">
         <div className="rounded-2xl p-5 flex items-center gap-4" style={{ background: "#14213D" }}>
-          <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "#FFB627" }}>
+          <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "linear-gradient(135deg, #FFB627, #E4572E)" }}>
             <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 19, color: "#14213D" }}>{name.slice(0, 2).toUpperCase()}</span>
           </div>
           <div>
