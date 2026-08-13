@@ -75,7 +75,7 @@ function TopBar({ name, onSwitchUser }) {
           <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 13, color: "#14213D" }}>H</span>
         </div>
         <div>
-          <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 14, color: "#FFF" }}>Helper Kampala</div>
+          <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: 14, color: "#FFF" }}>QuickHand</div>
           <div className="text-[10px]" style={{ color: "#8891A3", fontFamily: "'IBM Plex Mono', monospace" }}>KAMPALA</div>
         </div>
       </div>
